@@ -25,7 +25,7 @@ const Navbar = () => {
           <ul className="navbar-nav flex-row">
             <li className='nav-item active d-none d-sm-block'>
               <NavLink
-                className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light" : "")}
+                className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
                 to="/"
                 end
                 >
@@ -34,7 +34,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item d-none d-sm-block">
               <NavLink
-                className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light" : "")}
+                className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
                 to="/list"
                 end
                 >
@@ -43,7 +43,7 @@ const Navbar = () => {
             </li>         
             <li className="nav-item d-none d-sm-block">
               <NavLink
-                className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light" : "")}
+                className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
                 to="/receipts"
                 end
                 >
