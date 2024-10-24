@@ -1,58 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AddReceipt from "../../components/AddReceipt";
+import useReceipts from "../../hooks/useReceipts";
+import useShoppingList from "../../hooks/useShoppingList";
+import { Link } from 'react-router-dom'
+
 
 export const Receipts = () => {
+  const { receipts, fetchReceipts } = useReceipts()
+  const { items, fetchItems } = useShoppingList()
+
+  const areAllIngredientsAvailable = (ingredients, items) => 
+    ingredients.every(ingredient => items.some(item => item.name === ingredient && item.done))
+
+  useEffect(() => {
+    fetchReceipts();
+    fetchItems();
+  }, [])
 
   return (
     <div className="container mt-4">
       <div className="row">
-        {/* Card 1 */}
-        <div className="col-6 col-lg-3 mb-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Sosse Nr.1 </h5>
-              <span class="badge rounded-pill text-bg-primary m-1">Nudeln</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Zwiebeln</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Tomaten</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Thunfisch</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Creme Fraiche</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Oliven</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Kapern</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Thymian</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Oregano</span>
-              <span class="badge rounded-pill text-bg-primary m-1">Paprikapulver</span>
-
+        {receipts.map((receipt) => (
+          <Link 
+            className="col-6 col-lg-3 mb-4"
+            key={receipt.id}
+            to={`/receipts/${receipt.id}`}
+            state={{ receipt }}
+            style={{textDecoration: 'none'}}
+          >
+            <div className="card">
+              <div className="card-body shadow-lg">
+                <h5 className="card-title">{receipt.name}</h5>
+                {areAllIngredientsAvailable(receipt.ingredients, items) ?
+                  <span className='badge rounded-pill bg-success-subtle text-dark m1'>
+                    <small>Verfügbar</small>
+                    <span className="vr mx-2" />
+                    <i className='bi bi-check-circle-fill' />
+                  </span>
+                  :
+                  <span className='badge rounded-pill bg-danger-subtle text-dark m1'>
+                    <small>Zutaten fehlen</small>
+                    <span className="vr mx-2" />
+                    <i className='bi bi-x-circle-fill' />
+                  </span>
+                }
+              </div>
             </div>
-          </div>
-        </div>
-        {/* Card 2 */}
-        <div className="col-6 col-lg-3 mb-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card Title 2</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        {/* Card 3 */}
-        <div className="col-6 col-lg-3 mb-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card Title 3</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        {/* Card 4 */}
-        <div className="col-6 col-lg-3 mb-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card Title 4</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        {/* Add more cards as needed */}
+          </Link>
+        ))}
       </div>
+      <AddReceipt />
     </div>
   );
 };

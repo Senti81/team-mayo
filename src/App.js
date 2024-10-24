@@ -4,6 +4,7 @@ import useAuth from './hooks/useAuth';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Main } from './pages/main/index.jsx'
 import { Receipts } from './pages/receipts/index.jsx'
+import { Receipt } from './pages/receipt/index.jsx'
 import { List } from './pages/shoppingList/index.jsx';
 import Spinner from './components/Spinner.jsx';
 import './App.css'
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path='/' exact element={<Main />} />
             <Route path='/receipts' element={<Receipts />} />
+            <Route path='/receipts/:id' element={<Receipt />} />
             <Route path='/list' element={<List />} />
           </Routes>
         </div>

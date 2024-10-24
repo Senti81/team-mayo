@@ -6,6 +6,10 @@ body {
   -ms-user-select: none;
 }
 
+.a {
+  text-decoration: none;
+}
+
 .floating-btn {
   position: fixed;
   bottom: 30px; /* Abstand vom unteren Rand */

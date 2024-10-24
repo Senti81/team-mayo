@@ -28,7 +28,7 @@ const ShoppingList = () => {
             {items.filter((item) => item.done === false).map((item) => (
               <span 
                 key={item.id}
-                className="badge text-bg-danger m-1 px-2 py-1"
+                className="badge rounded-pill bg-danger-subtle text-primary-emphasis m-1 px-2 py-1"
                 onClick={() => handleToggle(item.id, item.done)}
                 >
               {item.name}
@@ -58,7 +58,7 @@ const ShoppingList = () => {
             {items.filter((item) => item.done === true && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
               <span 
                 key={item.id}
-                className="badge text-bg-success m-1 px-2 py-1"
+                className="badge rounded-pill bg-success-subtle text-primary-emphasis m-1 px-2 py-1"
                 onClick={() => handleToggle(item.id, item.done)}
                 >
               {item.name}
