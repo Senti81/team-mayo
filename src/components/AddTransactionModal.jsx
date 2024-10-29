@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
-import useTransaction from '../hooks/useTransaction';
+import React, { useState } from 'react'
+import useTransaction from '../hooks/useTransaction'
 
 const TransactionForm = () => {
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState('')
 
   const { addTransaction, loading, error } = useTransaction()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!amount) {
-      alert("Bitte einen Betrag eingeben");
-      return;
-    }
-
-    const result = await addTransaction(amount);
-
+  const handleSubmit = async () => {
+    if (!amount) return
+    const result = await addTransaction(amount)
     if (result.success) {
       console.log(result.message)
       setAmount('')

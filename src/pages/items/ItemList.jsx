@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { signOut } from 'firebase/auth'
 import AddItemModal from '../../components/AddItemModal'
 import { auth } from '../../config/firebase'
-import useShoppingList from '../../hooks/useShoppingList'
+import useItemList from '../../hooks/useItemList'
 
 const ShoppingList = () => {
-  const { items, fetchItems, updateItem, error } = useShoppingList()
+  const { items, fetchItems, updateItem, error } = useItemList()
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleToggle = async(id, currentItemStatus) => {

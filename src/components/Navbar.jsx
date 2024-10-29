@@ -1,7 +1,6 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import '../styles/navbar.css'
 import brand from '../icons/brand.png'
 import { NavLink } from 'react-router-dom';
 

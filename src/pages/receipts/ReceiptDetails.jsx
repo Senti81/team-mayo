@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { useLocation, Link } from "react-router-dom"
-import useShoppingList from "../../hooks/useShoppingList"
+import useItemList from "../../hooks/useItemList"
 import useReceipts from "../../hooks/useReceipts"
 
 const ReceiptDetails = () => {
   const location = useLocation()
   const receipt = location.state?.receipt
   const isIngredientAvailable = (ingredient, items) => items.some(item => item?.name === ingredient && item.done);
-  const { items, fetchItems } = useShoppingList()
+  const { items, fetchItems } = useItemList()
   const { fetchReceipts } = useReceipts()
 
   useEffect(() => {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useShoppingList from '../hooks/useShoppingList';
+import useItemList from '../hooks/useItemList';
 import useReceipts from '../hooks/useReceipts';
 
 const AddReceipt = () => {
   const [name, setName] = useState('');
   const [clickedItems, setClickedItems] = useState({});
 
-  const { items, fetchItems, error, loading} = useShoppingList()
+  const { items, fetchItems, error, loading} = useItemList()
   const { addReceipt } = useReceipts()
 
   const handleClick = (itemId) => {

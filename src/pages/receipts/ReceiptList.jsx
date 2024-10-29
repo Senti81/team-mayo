@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 
 import AddReceiptModal from "../../components/AddReceiptModal"
 import useReceipts from "../../hooks/useReceipts"
-import useShoppingList from "../../hooks/useShoppingList"
+import useItemList from "../../hooks/useItemList"
 
 
 const ReceiptList = () => {
   const { receipts, fetchReceipts } = useReceipts()
-  const { items, fetchItems } = useShoppingList()
+  const { items, fetchItems } = useItemList()
 
   const areAllIngredientsAvailable = (ingredients, items) => 
     ingredients.every(ingredient => items.some(item => item.name === ingredient && item.done))

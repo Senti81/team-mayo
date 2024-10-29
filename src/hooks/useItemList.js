@@ -2,7 +2,7 @@ import { useState } from "react";
 import { db } from "../config/firebase";
 import { query, addDoc, collection, onSnapshot, doc, updateDoc, orderBy, where, getDocs } from "firebase/firestore";
 
-const useShoppingList = () => {
+const useItemList = () => {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
@@ -58,4 +58,4 @@ const useShoppingList = () => {
   return { items, addItem, fetchItems, updateItem, loading, error };
 }
 
-export default useShoppingList
+export default useItemList

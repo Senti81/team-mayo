@@ -6,7 +6,7 @@ import Main from './pages/Main'
 import ReceiptList from './pages/receipts/ReceiptList'
 import ReceiptDetails from './pages/receipts/ReceiptDetails'
 import EditReceipt from './pages/receipts/EditReceipt'
-import ShoppingList from './pages/items/ShoppingList'
+import ItemList from './pages/items/ItemList'
 import Spinner from './components/Spinner';
 import './App.css'
 
@@ -26,7 +26,7 @@ function App() {
             <Route path='/receipts' element={<ReceiptList />} />
             <Route path='/receipts/:id/edit' element={<EditReceipt />} />
             <Route path='/receipts/:id' element={<ReceiptDetails />} />
-            <Route path='/items' element={<ShoppingList />} />
+            <Route path='/items' element={<ItemList />} />
           </Routes>
         </div>
       </Router>

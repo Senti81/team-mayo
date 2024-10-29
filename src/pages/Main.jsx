@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TransactionForm from '../components/TransactionForm.jsx'
+import AddTransactionModal from '../components/AddTransactionModal.jsx'
 import useAuth from '../hooks/useAuth';
 import useTransaction from '../hooks/useTransaction';
 import Spinner from '../components/Spinner';
@@ -106,7 +106,7 @@ const Main = () => {
           </table>
         </div>
       </div>
-      <TransactionForm />
+      <AddTransactionModal />
     </>
   )
 }

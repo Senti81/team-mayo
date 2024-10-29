@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import useShoppingList from '../hooks/useShoppingList';
+import useItemList from '../hooks/useItemList';
 import { Toast } from 'bootstrap'
 
 const ShoppingListForm = () => {
   const [item, setItem] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState(null)
-  const { addItem } = useShoppingList()
+  const { addItem } = useItemList()
 
   const handleAddItem = async () => {
     const result = await addItem(item)
