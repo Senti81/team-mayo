@@ -1,4 +1,4 @@
-import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
+import { addDoc, collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../config/firebase";
 
@@ -37,7 +37,22 @@ const useReceipts = () => {
     return () => unsubscribe();
   }
 
-  return { loading, error, receipts, addReceipt, fetchReceipts }
+  const updateReceipt = async (id, description) => {
+    setError(null)
+    setLoading(true)
+    try {
+      const receiptRef = doc(db, 'receipts', id)
+      await updateDoc(receiptRef, { description })
+      return { success : true, message: 'Rezept erfolgreich aktualisiert'}
+    } catch (error) {
+      setError(error)
+      return { success : false, message: error.message}
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { loading, error, receipts, addReceipt, fetchReceipts, updateReceipt }
 }
 
 export default useReceipts
