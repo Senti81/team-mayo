@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Link } from 'react-router-dom'
 
-import AddReceipt from "../../components/AddReceipt"
+import AddReceiptModal from "../../components/AddReceiptModal"
 import useReceipts from "../../hooks/useReceipts"
 import useShoppingList from "../../hooks/useShoppingList"
 
@@ -50,7 +50,7 @@ const ReceiptList = () => {
           </Link>
         ))}
       </div>
-      <AddReceipt />
+      <AddReceiptModal />
     </div>
   )
 }

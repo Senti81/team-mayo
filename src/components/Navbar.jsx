@@ -35,7 +35,7 @@ const Navbar = () => {
             <li className="nav-item d-none d-sm-block">
               <NavLink
                 className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                to="/list"
+                to="/items"
                 end
                 >
                 Einkaufsliste
@@ -62,7 +62,7 @@ const Navbar = () => {
             <li className="nav-item d-block d-sm-none">
               <NavLink
                 className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
-                to="/list"
+                to="/items"
                 end
                 >
                 <i className="bi bi-card-checklist"></i>                  

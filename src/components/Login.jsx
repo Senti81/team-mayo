@@ -1,12 +1,12 @@
-import React from 'react';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../config/firebase';
-import '../styles/login.css'
+import React from 'react'
+import { signInWithPopup } from 'firebase/auth'
+import { auth, provider } from '../config/firebase'
 import logo from '../icons/logo.webp'
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth'
+import '../styles/login.css'
 
-const GoogleSignIn = () => {
-  const { user, loading, error } = useAuth()
+const Login = () => {
+  const { error } = useAuth()
 
   const handleGoogleSignIn = async () => {
     try {
@@ -37,4 +37,4 @@ const GoogleSignIn = () => {
   );
 };
 
-export default GoogleSignIn;
+export default Login

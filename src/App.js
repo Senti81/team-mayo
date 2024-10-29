@@ -1,20 +1,20 @@
-import GoogleSignIn from './components/GoogleSignIn';
-import Navbar from './components/Navbar';
-import useAuth from './hooks/useAuth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Main from './pages/Main.jsx'
-import ReceiptList from './pages/receipts/ReceiptList.jsx'
-import ReceiptDetails from './pages/receipts/ReceiptDetails.jsx'
-import EditReceipt from './pages/receipts/EditReceipt.jsx'
-import ShoppingList from './pages/items/ShoppingList.jsx';
-import Spinner from './components/Spinner.jsx';
+import Login from './components/Login'
+import Navbar from './components/Navbar'
+import useAuth from './hooks/useAuth'
+import Main from './pages/Main'
+import ReceiptList from './pages/receipts/ReceiptList'
+import ReceiptDetails from './pages/receipts/ReceiptDetails'
+import EditReceipt from './pages/receipts/EditReceipt'
+import ShoppingList from './pages/items/ShoppingList'
+import Spinner from './components/Spinner';
 import './App.css'
 
 function App() {
   const { user, loading } = useAuth();
 
   if (loading) return <Spinner />
-  if (!user) return <GoogleSignIn />
+  if (!user) return <Login />
 
   return (
     <div className="App">
@@ -26,7 +26,7 @@ function App() {
             <Route path='/receipts' element={<ReceiptList />} />
             <Route path='/receipts/:id/edit' element={<EditReceipt />} />
             <Route path='/receipts/:id' element={<ReceiptDetails />} />
-            <Route path='/list' element={<ShoppingList />} />
+            <Route path='/items' element={<ShoppingList />} />
           </Routes>
         </div>
       </Router>
