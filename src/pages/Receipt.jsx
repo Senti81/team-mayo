@@ -1,9 +1,9 @@
 import { useLocation, Link } from "react-router-dom"
-import useShoppingList from "../../hooks/useShoppingList";
+import useShoppingList from "../hooks/useShoppingList";
 import { useEffect } from "react";
-import useReceipts from "../../hooks/useReceipts";
+import useReceipts from "../hooks/useReceipts";
 
-export const Receipt = () => {
+const Receipt = () => {
   const location = useLocation()
   const receipt = location.state?.receipt
   const isIngredientAvailable = (ingredient, items) => items.some(item => item?.name === ingredient && item.done);
@@ -56,3 +56,5 @@ export const Receipt = () => {
     </div>
   )
 }
+
+export default Receipt

@@ -1,12 +1,12 @@
 import GoogleSignIn from './components/GoogleSignIn';
 import Navbar from './components/Navbar';
 import useAuth from './hooks/useAuth';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Main } from './pages/main/index.jsx'
-import { Receipts } from './pages/receipts/index.jsx'
-import { Receipt } from './pages/receipt/index.jsx'
-import { EditReceipt } from './pages/editReceipt/index.jsx'
-import { List } from './pages/shoppingList/index.jsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Main from './pages/Main.jsx'
+import Receipts from './pages/Receipts.jsx'
+import Receipt from './pages/Receipt.jsx'
+import EditReceipt from './pages/EditReceipt.jsx'
+import List from './pages/List.jsx';
 import Spinner from './components/Spinner.jsx';
 import './App.css'
 
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <Navbar />
         <div style={{ paddingTop: '75px' }}>
           <Routes>
@@ -29,7 +29,7 @@ function App() {
             <Route path='/list' element={<List />} />
           </Routes>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
