@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import useReceipts from "../hooks/useReceipts"
+
+import useReceipts from "../../hooks/useReceipts"
 
 const EditReceipt = () => {
   const location = useLocation()

@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import AddReceipt from "../components/AddReceipt";
-import useReceipts from "../hooks/useReceipts";
-import useShoppingList from "../hooks/useShoppingList";
+import React, { useEffect } from "react"
 import { Link } from 'react-router-dom'
 
+import AddReceipt from "../../components/AddReceipt"
+import useReceipts from "../../hooks/useReceipts"
+import useShoppingList from "../../hooks/useShoppingList"
 
-const Receipts = () => {
+
+const ReceiptList = () => {
   const { receipts, fetchReceipts } = useReceipts()
   const { items, fetchItems } = useShoppingList()
 
@@ -54,4 +55,4 @@ const Receipts = () => {
   )
 }
 
-export default Receipts
+export default ReceiptList

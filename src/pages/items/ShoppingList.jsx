@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import useShoppingList from '../hooks/useShoppingList'
-import { signOut } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { signOut } from 'firebase/auth'
+import ShoppingListForm from '../../components/ShoppingListForm'
+import { auth } from '../../config/firebase'
+import useShoppingList from '../../hooks/useShoppingList'
 
 const ShoppingList = () => {
   const { items, fetchItems, updateItem, error } = useShoppingList()
@@ -17,9 +18,10 @@ const ShoppingList = () => {
   useEffect(() => { fetchItems()}, [])
   
   if (error) signOut(auth)
-
-  return (    
-    <div className="container">
+  return (
+    <>
+      <ShoppingListForm />
+      <div className="container">
       <div className="row mx-1">
         <div className="col-12 col-md-6 mt-3">
           <div className="h4 pb-2 mb-4 border-bottom border-danger">
@@ -66,8 +68,9 @@ const ShoppingList = () => {
             ))}
         </div>
       </div>
-    </div>  
+    </div>
+    </>
   )
 }
 
-export default ShoppingList;
+export default ShoppingList
