@@ -46,7 +46,7 @@ const useTransaction = () => {
     setError(null);    
     const q = query(
       collection(db, 'transactions'),
-      orderBy('createdAt', 'desc')
+      orderBy('createdAt')
     )
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const userTransactions = snapshot.docs.map((doc) => ({
