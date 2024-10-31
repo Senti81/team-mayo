@@ -25,7 +25,7 @@ const Navbar = () => {
             <li className='nav-item active d-none d-sm-block'>
               <NavLink
                 className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                to="/"
+                to="/transactions"
                 end
                 >
                 Aktuelle Ausgaben
@@ -52,7 +52,7 @@ const Navbar = () => {
             <li className="nav-item d-block d-sm-none">
               <NavLink
                 className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
-                to="/"
+                to="/transactions"
                 end
                 >
                 <i className="bi bi-currency-euro"></i>
@@ -79,7 +79,7 @@ const Navbar = () => {
           </ul>
           <ul className='navbar-nav ms-auto'>
             <li className="nav-item d-none d-sm-block">
-              <a className="nav-link text-danger" href="#" onClick={handleLogout}>Abmelden</a>
+              <a className="nav-link text-danger" href="/" onClick={handleLogout}>Abmelden</a>
             </li>
             <li className="nav-item d-block d-sm-none">
               <i className="bi bi-box-arrow-right text-danger fs-3" onClick={handleLogout}/>
