@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db } from "../config/firebase";
-import { query, addDoc, collection, onSnapshot, doc, updateDoc, orderBy, where, getDocs } from "firebase/firestore";
+import { query, addDoc, collection, onSnapshot, doc, updateDoc, orderBy, where, getDocs, Timestamp } from "firebase/firestore";
 
 const useItemList = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const useItemList = () => {
       if (!querySnapshot.empty) {
         return { success: false, message: 'Das haben wir bereits im Vorrat!' };
       }
-      const itemData = { name, done: false }
+      const itemData = { name, done: false, createdAt: Timestamp.now() }
       await addDoc(collection(db, "shoppingList"), itemData)
       return { success: true, message: 'Item erfolgreich hinzugefügt!' };
     } catch (error) {
@@ -27,7 +27,7 @@ const useItemList = () => {
     try {
       setLoading(true);
       const itemRef = doc(db, "shoppingList", id)
-      await updateDoc(itemRef, {done : !currentItemStatus})
+      await updateDoc(itemRef, {done: !currentItemStatus, updatedAt: Timestamp.now()})
       setLoading(false);
       return { success: true, message: 'Item erfolgreich aktualisiert!' };
     } catch (error) {
@@ -40,7 +40,7 @@ const useItemList = () => {
     setLoading(true);
     const q = query(
       collection(db, 'shoppingList'),
-      orderBy('name')
+      orderBy('updatedAt', 'desc')
     )
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const userItems = snapshot.docs.map((doc) => ({
