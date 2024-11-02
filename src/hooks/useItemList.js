@@ -16,7 +16,7 @@ const useItemList = () => {
       if (!querySnapshot.empty) {
         return { success: false, message: 'Das haben wir bereits im Vorrat!' };
       }
-      const itemData = { name, done: false, createdAt: Timestamp.now() }
+      const itemData = { name, done: false, updatedAt: Timestamp.now() }
       await addDoc(collection(db, "shoppingList"), itemData)
       return { success: true, message: 'Item erfolgreich hinzugefügt!' };
     } catch (error) {
