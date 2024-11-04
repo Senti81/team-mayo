@@ -23,52 +23,38 @@ const Navbar = () => {
               <img src={brand} alt="Bootstrap" width="30" height="30"/>
             </a>
             <ul className="navbar-nav flex-row">
+
+              {/* Viewport >= Tablet */}
               <li className='nav-item active d-none d-sm-block'>
-                <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                  to="/transactions"                  
-                  >
+                <NavLink className={({ isActive }) => `nav-link ${isActive ? 'border-bottom border-black border-1' : ''}`} to="/transactions">
                   Aktuelle Ausgaben
                 </NavLink>              
               </li>
               <li className="nav-item d-none d-sm-block">
-                <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                  to="/items"                  
-                  >
+                <NavLink className={({ isActive }) => `nav-link ${isActive ? 'border-bottom border-black border-1' : ''}`} to="/items">
                   Einkaufsliste
                 </NavLink>
               </li>         
               <li className="nav-item d-none d-sm-block">
-                <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " border-bottom border-black border-1" : "")}
-                  to="/receipts"
-                  >
+                <NavLink className={({ isActive }) => `nav-link ${isActive ? 'border-bottom border-black border-1' : ''}`} to="/receipts">
                   Rezepte
                 </NavLink>
               </li>
+
+              {/* Viewport Mobile */}
               <li className="nav-item d-block d-sm-none">
-                <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
-                  to="/transactions"
-                  >
-                  <i className="bi bi-currency-euro"></i>
+                <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="/transactions">
+                  <i className="bi bi-currency-euro" />
                 </NavLink>
               </li>
               <li className="nav-item d-block d-sm-none">
-                <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
-                  to="/items"                 
-                  >
-                  <i className="bi bi-card-checklist"></i>                  
+                <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="/items">
+                  <i className="bi bi-card-checklist" />                 
                 </NavLink>
               </li>
               <li className="nav-item d-block d-sm-none">
-              <NavLink
-                  className={({ isActive }) => "nav-link" + (isActive ? " bg-secondary text-light rounded px-3" : " px-3")}
-                  to="/receipts"                  
-                  >
-                  <i className="bi bi-lightbulb"></i>
+                <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="/receipts">
+                  <i className="bi bi-lightbulb" />
                 </NavLink>
               </li>
             </ul>
