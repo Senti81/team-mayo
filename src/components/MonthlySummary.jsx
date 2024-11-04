@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import useAuth from "../hooks/useAuth"
 import useTransaction from "../hooks/useTransaction"
 import { calculateBalanceBetweenUsers, calculateTotalAmount } from "../utils/transactionUtils"
+import MonthlyInfoModal from "./MonthlyInfoModal"
 
 const MonthlySummary = ({ monthIndex }) => {
   const { user } = useAuth()
@@ -21,19 +22,21 @@ const MonthlySummary = ({ monthIndex }) => {
 
   return (
     <div className="col">
-      <div className="card mb-4 rounded-3 shadow-sm">
+      <div className="card mb-4 rounded-3 shadow-sm"
+        data-bs-toggle="modal" 
+        data-bs-target={`#info-${monthIndex}`}
+        >
         <div className="card-header py-3">
           <h4 className="my-0 fw-normal">{new Date(2024, monthIndex).toLocaleString('de-DE', {month: 'long'})}</h4>
         </div>
-        {userTotalAmount !== 0 &&
+        <div></div>
+        {balanceInfo.totalAmount !== '0.00' &&
           <div className="card-body">
             <h1 className="card-title pricing-card-title">{balanceInfo?.totalAmount} €</h1>
-            <ul className="list-unstyled mt-3 mb-4">
-              <li>{balanceInfo?.message}</li>
-            </ul>
           </div>
         }
       </div>
+      <MonthlyInfoModal balanceInfo={balanceInfo} modalId={`info-${monthIndex}`} />
     </div>
   )
 }
