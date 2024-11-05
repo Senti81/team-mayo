@@ -1,50 +1,53 @@
 import React, { useEffect, useState } from 'react'
-import { signOut } from 'firebase/auth'
-import AddItemModal from '../../components/AddItemModal'
 import { auth } from '../../config/firebase'
+import { signOut } from 'firebase/auth'
+
+import AddItemModal from '../../components/AddItemModal'
+import FilteredItemList from '../../components/FilteredItemList'
+import ItemSearchBar from '../../components/ItemSearchBar'
+
 import useItemList from '../../hooks/useItemList'
-import ItemsOutOfStock from '../../components/ItemsOutOfStock'
-import ItemsInStock from '../../components/ItemsInStock'
 
 const ShoppingList = () => {
-  const { items, fetchItems, updateItem, error } = useItemList()
   const [searchTerm, setSearchTerm] = useState('');
+  const { items, fetchItems, updateItem, error } = useItemList()
 
-  const handleToggle = async(id, currentItemStatus) => {
-    await updateItem(id, currentItemStatus)
-  };
+  const handleToggle = async(id, currentItemStatus) => await updateItem(id, currentItemStatus)
+  const handleResetFilter = () => setSearchTerm('')
 
-  const handleResetFilter = () => {
-    setSearchTerm('')
-  }
   useEffect(() => { fetchItems()}, [])
   
   if (error) signOut(auth)
+
   return (
-    <>
-      <div className="container">
-        <div className="row mx-1">
-          <ItemsOutOfStock
-            items={items}
-            handleToggle={handleToggle}
-            status={2}
-          />
-          <ItemsOutOfStock
-            items={items}
-            handleToggle={handleToggle}
-            status={1}
-          />
-          <ItemsInStock 
-            items={items}
-            handleToggle={handleToggle}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            handleResetFilter={handleResetFilter}
-          />
-        </div>
-      </div>
+    <div className="container">
       <AddItemModal />
-    </>
+      <div className="row mx-1">
+        <ItemSearchBar 
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleResetFilter={handleResetFilter}
+        />
+        <FilteredItemList
+          items={items}
+          handleToggle={handleToggle}
+          searchTerm={searchTerm}
+          status={2}
+        />
+        <FilteredItemList
+          items={items}
+          handleToggle={handleToggle}
+          searchTerm={searchTerm}
+          status={1}
+        />
+        <FilteredItemList
+          items={items}
+          handleToggle={handleToggle}
+          searchTerm={searchTerm}
+          status={0}
+        />
+      </div>
+    </div>
   )
 }
 

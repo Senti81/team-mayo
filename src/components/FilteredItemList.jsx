@@ -1,4 +1,4 @@
-const ItemsOutOfStock = ({ items, handleToggle, status }) => {
+const FilteredItemList = ({ items, searchTerm, handleToggle, status }) => {
 
   const formatComponent = {
     0: {
@@ -25,7 +25,7 @@ const ItemsOutOfStock = ({ items, handleToggle, status }) => {
       <div className={`h4 pb-2 mb-4 border-bottom ${currentFormat.border}`}>
         <h6 className='display-6'>{currentFormat.name}</h6>
       </div>
-        {items.filter((item) => item.status === status).map((item) => (
+        {items.filter((item) => item.status === status && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
           <span 
           key={item.id}
           className={`badge rounded-pill text-primary-emphasis m-1 px-2 py-1 ${currentFormat.badge}`}
@@ -38,4 +38,4 @@ const ItemsOutOfStock = ({ items, handleToggle, status }) => {
   )
 }
 
-export default ItemsOutOfStock
+export default FilteredItemList

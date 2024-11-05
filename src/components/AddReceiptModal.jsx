@@ -16,7 +16,7 @@ const AddReceipt = () => {
     }));
   };
 
-  useEffect(() => { fetchItems()}, [])
+  useEffect(() => { fetchItems(true)}, [])
 
   const handleSubmit = async () => {
     const selectedItems = items.filter(item => clickedItems[item.id]);

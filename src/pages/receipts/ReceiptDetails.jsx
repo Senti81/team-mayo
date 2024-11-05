@@ -6,7 +6,7 @@ import useReceipts from "../../hooks/useReceipts"
 const ReceiptDetails = () => {
   const location = useLocation()
   const receipt = location.state?.receipt
-  const isIngredientAvailable = (ingredient, items) => items.some(item => item?.name === ingredient && item.done);
+  const isIngredientAvailable = (ingredient, items) => items.some(item => item?.name === ingredient && item.status === 0);
   const { items, fetchItems } = useItemList()
   const { fetchReceipts } = useReceipts()
 

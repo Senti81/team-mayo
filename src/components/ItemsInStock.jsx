@@ -5,7 +5,7 @@ const ItemsInStock = ({ items, handleToggle, searchTerm, setSearchTerm, handleRe
       <div className="h4 pb-2 mb-4 border-bottom border-success">
         <h6 className='display-6'>Im Vorrat:</h6>
       </div>
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           className="form-control"
@@ -20,7 +20,7 @@ const ItemsInStock = ({ items, handleToggle, searchTerm, setSearchTerm, handleRe
           >
           <i className="bi bi-x-lg"></i>
         </button>
-      </div>
+      </div> */}
         {items.filter((item) => item.status === 0 && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
           <span 
           key={item.id}

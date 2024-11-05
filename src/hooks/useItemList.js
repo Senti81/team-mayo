@@ -14,9 +14,9 @@ const useItemList = () => {
       const q = query(collection(db, "shoppingList"), where("name", "==", name));
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
-        return { success: false, message: 'Das haben wir bereits im Vorrat!' };
+        return { success: false, message: 'Das haben wir bereits!' };
       }
-      const itemData = { name, status: 0, updatedAt: Timestamp.now() }
+      const itemData = { name, status: 1, updatedAt: Timestamp.now() }
       await addDoc(collection(db, "shoppingList"), itemData)
       return { success: true, message: 'Item erfolgreich hinzugefügt!' };
     } catch (error) {
@@ -41,11 +41,11 @@ const useItemList = () => {
     }
   }
 
-  const fetchItems = () => {
+  const fetchItems = (isSortedAlphabetical = false) => {
     setLoading(true);
     const q = query(
       collection(db, 'shoppingList'),
-      orderBy('updatedAt', 'desc')
+      orderBy(isSortedAlphabetical ? 'name' : 'updatedAt', isSortedAlphabetical ? 'asc' : 'desc')
     )
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const userItems = snapshot.docs.map((doc) => ({
