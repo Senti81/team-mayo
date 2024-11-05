@@ -3,6 +3,8 @@ import { signOut } from 'firebase/auth'
 import AddItemModal from '../../components/AddItemModal'
 import { auth } from '../../config/firebase'
 import useItemList from '../../hooks/useItemList'
+import ItemsOutOfStock from '../../components/ItemsOutOfStock'
+import ItemsInStock from '../../components/ItemsInStock'
 
 const ShoppingList = () => {
   const { items, fetchItems, updateItem, error } = useItemList()
@@ -22,50 +24,23 @@ const ShoppingList = () => {
     <>
       <div className="container">
         <div className="row mx-1">
-          <div className="col-12 col-md-6 mt-3">
-            <div className="h4 pb-2 mb-4 border-bottom border-danger">
-              <h6 className='display-6'>Einkaufsliste:</h6>
-            </div>
-              {items.filter((item) => item.done === false).map((item) => (
-                <span 
-                key={item.id}
-                className="badge rounded-pill bg-danger-subtle text-primary-emphasis m-1 px-2 py-1"
-                onClick={() => handleToggle(item.id, item.done)}
-                >
-                {item.name}
-                </span>
-              ))}
-          </div>
-          <div className="col-12 col-md-6 mt-3">
-            <div className="h4 pb-2 mb-4 border-bottom border-success">
-              <h6 className='display-6'>Im Vorrat:</h6>
-            </div>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Suche..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={handleResetFilter}
-                >
-                <i className="bi bi-x-lg"></i>
-              </button>
-            </div>
-              {items.filter((item) => item.done === true && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
-                <span 
-                key={item.id}
-                className="badge rounded-pill bg-success-subtle text-primary-emphasis m-1 px-2 py-1"
-                onClick={() => handleToggle(item.id, item.done)}
-                >
-                {item.name}
-                </span>
-              ))}
-          </div>
+          <ItemsOutOfStock
+            items={items}
+            handleToggle={handleToggle}
+            status={2}
+          />
+          <ItemsOutOfStock
+            items={items}
+            handleToggle={handleToggle}
+            status={1}
+          />
+          <ItemsInStock 
+            items={items}
+            handleToggle={handleToggle}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleResetFilter={handleResetFilter}
+          />
         </div>
       </div>
       <AddItemModal />

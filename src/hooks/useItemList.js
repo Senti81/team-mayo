@@ -16,7 +16,7 @@ const useItemList = () => {
       if (!querySnapshot.empty) {
         return { success: false, message: 'Das haben wir bereits im Vorrat!' };
       }
-      const itemData = { name, done: false, updatedAt: Timestamp.now() }
+      const itemData = { name, status: 0, updatedAt: Timestamp.now() }
       await addDoc(collection(db, "shoppingList"), itemData)
       return { success: true, message: 'Item erfolgreich hinzugefügt!' };
     } catch (error) {
@@ -27,7 +27,12 @@ const useItemList = () => {
     try {
       setLoading(true);
       const itemRef = doc(db, "shoppingList", id)
-      await updateDoc(itemRef, {done: !currentItemStatus, updatedAt: Timestamp.now()})
+
+      let newItemStatus = 0
+      if (currentItemStatus !== 2) 
+        newItemStatus = currentItemStatus +1     
+
+      await updateDoc(itemRef, {status: newItemStatus, updatedAt: Timestamp.now()})
       setLoading(false);
       return { success: true, message: 'Item erfolgreich aktualisiert!' };
     } catch (error) {
