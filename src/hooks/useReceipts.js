@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../config/firebase";
 
@@ -52,7 +52,21 @@ const useReceipts = () => {
     }
   }
 
-  return { loading, error, receipts, addReceipt, fetchReceipts, updateReceipt }
+  const deleteReceipt = async (id) => {
+    setError(null)
+    setLoading(true)
+    try {
+      await deleteDoc(doc(db, 'receipts', id))
+      return { success : true, message: 'Rezept erfolgreich gelöscht'}
+    } catch (error) {
+      setError(error)
+      return { success : false, message: error.message}
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { loading, error, receipts, addReceipt, fetchReceipts, updateReceipt, deleteReceipt }
 }
 
 export default useReceipts

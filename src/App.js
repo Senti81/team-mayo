@@ -11,6 +11,7 @@ import Spinner from './components/Spinner'
 import './App.css'
 import Main from './pages/Main'
 import NoPage from './pages/404'
+import AddReceipt from './pages/receipts/AddReceipt'
 
 function App() {
   const { user, loading } = useAuth();
@@ -27,6 +28,7 @@ function App() {
             <Route path='/transactions' exact element={<TransactionList />} />
             <Route path='/items' element={<ItemList />} />
             <Route path='/receipts' element={<ReceiptList />} />
+            <Route path='/receipts/add' element={<AddReceipt />} />
             <Route path='/receipts/:id/edit' element={<EditReceipt />} />
             <Route path='/receipts/:id' element={<ReceiptDetails />} />
             <Route path='*' element={<NoPage />} />

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
 
-import AddReceiptModal from "../../components/AddReceiptModal"
 import useReceipts from "../../hooks/useReceipts"
 import useItemList from "../../hooks/useItemList"
 import ReceiptCard from "../../components/ReceiptCard"
+import { Link } from "react-router-dom"
 
 const ReceiptList = () => {
   const { receipts, fetchReceipts } = useReceipts()
@@ -21,7 +21,14 @@ const ReceiptList = () => {
           <ReceiptCard key={receipt.id} receipt={receipt} items={items} />
         ))}
       </div>
-      <AddReceiptModal />
+      <div className="d-flex justify-content-center">
+        <Link
+          to={'/receipts/add'}
+          className="btn btn-primary"
+        >
+          Hinzufügen
+        </Link>
+      </div>
     </div>
   )
 }
