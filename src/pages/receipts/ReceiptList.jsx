@@ -15,13 +15,14 @@ const ReceiptList = () => {
   }, [])
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-2">
+      <h6 className="display-6 text-center mb-2">Rezepte</h6>
       <div className="row">
         {receipts.map((receipt) => (
-          <ReceiptCard key={receipt.id} receipt={receipt} items={items} />
+          <ReceiptCard key={receipt.id} receipt={receipt} items={items} />   
         ))}
       </div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-3">
         <Link
           to={'/receipts/add'}
           className="btn btn-primary"

@@ -7,7 +7,7 @@ const EditReceipt = () => {
 
   return (
     <div className="container">
-      <div className="display-6 mb-3 text-center">Neues Rezept hinzufügen</div>
+      <div className="display-6 mb-3 text-center">Rezept bearbeiten</div>
       <ReceiptForm receipt={receipt} />
     </div>
   )

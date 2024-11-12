@@ -24,7 +24,7 @@ const ReceiptDetails = () => {
         <div className="card-body">
           <div className="mb-4">
             <h3 className="h5">Zutaten</h3>
-            <ul className="list-group list-group-flush">
+            <ul className="list-group">
               {receipt?.ingredients.map((ingredient, index) => {
                 const available = isIngredientAvailable(ingredient, items);
                 return (
@@ -33,9 +33,10 @@ const ReceiptDetails = () => {
                     className={`list-group-item d-flex justify-content-between align-items-center ${available ? 'bg-success-subtle' : 'bg-danger-subtle'}`}
                   >
                     {ingredient}
-                  <span className={`badge ${available ? 'bg-success' : 'bg-danger'}`}>
+                  <i className={available ? 'bi bi-check-lg' : 'bi bi-ban'}/>
+                  {/* <span className={`badge ${available ? 'bg-success' : 'bg-danger'}`}>
                     {available ? 'Verfügbar' : 'Fehlt'}
-                  </span>
+                  </span> */}
                 </li>
               )})}
             </ul>
@@ -49,8 +50,22 @@ const ReceiptDetails = () => {
           </div>
         </div>
         <div className="card-footer text-center d-flex justify-content-sm-start justify-content-between">
-          <Link className="btn btn-outline-secondary me-sm-5" to={'/receipts'}>Zurück</Link>
-          <Link className="btn btn-primary" to={`/receipts/${receipt?.id}/edit`} state={{ receipt }}>Bearbeiten</Link>
+          <Link 
+            to={'..'}
+            relative="path"
+            className="btn btn-outline-secondary me-sm-5" 
+          >
+            <i className="bi bi-arrow-counterclockwise me-2"></i>
+            Zurück
+          </Link>
+          <Link 
+            to={`/receipts/${receipt.id}/edit`} 
+            state={{ receipt }}
+            className="btn btn-primary"
+          >
+            <i className="bi bi-pencil me-2"></i>
+            Bearbeiten
+          </Link>
         </div>
       </div>
     </div>

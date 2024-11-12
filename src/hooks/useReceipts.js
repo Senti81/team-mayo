@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../config/firebase";
 
@@ -22,7 +22,7 @@ const useReceipts = () => {
   }
 
   const fetchReceipts = () => {
-    const q = query(collection(db, 'receipts'))
+    const q = query(collection(db, 'receipts'), orderBy('name'))
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const items = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -37,12 +37,11 @@ const useReceipts = () => {
     return () => unsubscribe();
   }
 
-  const updateReceipt = async (id, description) => {
+  const updateReceipt = async (id, payload) => {
     setError(null)
     setLoading(true)
     try {
-      const receiptRef = doc(db, 'receipts', id)
-      await updateDoc(receiptRef, { description })
+      await updateDoc(doc(db, 'receipts', id), payload)
       return { success : true, message: 'Rezept erfolgreich aktualisiert'}
     } catch (error) {
       setError(error)
