@@ -12,7 +12,7 @@ const Logout = () => {
   }
   return (
     <div className="col-sm-6 col-lg-4 mb-3 mb-sm-3">
-      <div className="h-100 card shadow">
+      <div className="card p-2 shadow">
         <div className="card-body">
           <h5 className="card-title">Abmelden</h5>
           <p className="card-text"></p>

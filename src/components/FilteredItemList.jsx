@@ -27,9 +27,9 @@ const FilteredItemList = ({ items, searchTerm, handleToggle, status }) => {
       </div>
         {items.filter((item) => item.status === status && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
           <span 
-            key={item.id}
-            className={`badge rounded-pill text-primary-emphasis m-1 px-2 py-1 ${currentFormat.badge}`}
-            onClick={() => handleToggle(item.id, item.status)}
+          key={item.id}
+          className={`badge rounded-pill text-primary-emphasis m-1 px-2 py-1 ${currentFormat.badge}`}
+          onClick={() => handleToggle(item.id, item.status)}
           >
           {item.name}
           </span>

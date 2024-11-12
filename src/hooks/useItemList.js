@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db } from "../config/firebase";
-import { query, addDoc, collection, onSnapshot, doc, updateDoc, orderBy, where, getDocs, Timestamp } from "firebase/firestore";
+import { query, addDoc, collection, onSnapshot, doc, updateDoc, orderBy, where, getDocs, Timestamp, deleteDoc } from "firebase/firestore";
 
 const useItemList = () => {
   const [loading, setLoading] = useState(false);
@@ -41,6 +41,17 @@ const useItemList = () => {
     }
   }
 
+  const deleteItem = async (id) => {
+    if  (!id) return
+    try {
+      await deleteDoc(doc(db, 'shoppingList', id))
+      console.log(`Item mit Id ${id} erfolgreich gelöscht`)
+    } catch (error) {
+      setLoading(false);
+      return { success: false, message: error.message };
+    }
+  }
+
   const fetchItems = (isSortedAlphabetical = false) => {
     setLoading(true);
     const q = query(
@@ -60,7 +71,7 @@ const useItemList = () => {
       });
     return () => unsubscribe();
   }
-  return { items, addItem, fetchItems, updateItem, loading, error };
+  return { items, addItem, fetchItems, updateItem, deleteItem, loading, error };
 }
 
 export default useItemList
