@@ -1,19 +1,10 @@
 import React from 'react';
-import { signOut } from 'firebase/auth';
-import { auth } from '../config/firebase';
 import brand from '../icons/brand.png'
 import { NavLink, Outlet } from 'react-router-dom';
+import useAuth from '../hooks/useAuth'
 
 const Navbar = () => {
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log("Erfolgreich abgemeldet");
-    } catch (error) {
-      console.error("Fehler beim Abmelden:", error.message);
-    }
-  };
-
+  const { user } = useAuth()
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary">
@@ -60,10 +51,19 @@ const Navbar = () => {
             </ul>
             <ul className='navbar-nav ms-auto'>
               <li className="nav-item d-none d-sm-block">
-                <a className="nav-link text-danger" href="/" onClick={handleLogout}>Abmelden</a>
+                <NavLink className={({ isActive }) => `nav-link ${isActive ? 'border-bottom border-black border-1' : ''}`} to="profile">
+                  Mein Profil
+                </NavLink> 
               </li>
               <li className="nav-item d-block d-sm-none">
-                <i className="bi bi-box-arrow-right text-danger fs-3" onClick={handleLogout}/>
+                <NavLink className="nav-link px-3" to="profile">
+                  <img
+                    src={user?.photoURL}
+                    alt="profilePic"
+                    className="profile-pic"
+                    style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+                  />
+                </NavLink>
               </li>
             </ul>
           </div>

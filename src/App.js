@@ -12,6 +12,7 @@ import './App.css'
 import Main from './pages/Main'
 import NoPage from './pages/404'
 import AddReceipt from './pages/receipts/AddReceipt'
+import Profile from './pages/profile/Profile'
 
 function App() {
   const { user, loading } = useAuth();
@@ -25,7 +26,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Navbar />}>
             <Route index element={<Main />} />
-            <Route path='/transactions' exact element={<TransactionList />} />
+            <Route path='profile' element={<Profile />} />
+            <Route path='/transactions' element={<TransactionList />} />
             <Route path='/items' element={<ItemList />} />
             <Route path='/receipts' element={<ReceiptList />} />
             <Route path='/receipts/add' element={<AddReceipt />} />
