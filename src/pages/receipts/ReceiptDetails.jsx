@@ -34,9 +34,6 @@ const ReceiptDetails = () => {
                   >
                     {ingredient}
                   <i className={available ? 'bi bi-check-lg' : 'bi bi-ban'}/>
-                  {/* <span className={`badge ${available ? 'bg-success' : 'bg-danger'}`}>
-                    {available ? 'Verfügbar' : 'Fehlt'}
-                  </span> */}
                 </li>
               )})}
             </ul>
