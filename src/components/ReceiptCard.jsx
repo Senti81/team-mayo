@@ -9,7 +9,7 @@ const ReceiptCard = ({ receipt, items }) => {
     <Link 
       className="col-12 col-sm-6 col-md-4 col-lg-3 mb-sm-2 px-5 px-sm-1 my-2 my-sm-1"
       to={`/receipts/${receipt.id}`}
-      state={{ receipt }}
+      state={{ receipt, ingredientsMissing: !areAllIngredientsAvailable(receipt.ingredients, items) }}
       style={{textDecoration: 'none'}}
     >
       <div className={areAllIngredientsAvailable(receipt.ingredients, items) ? 'card border-success' : 'card border-danger'}>

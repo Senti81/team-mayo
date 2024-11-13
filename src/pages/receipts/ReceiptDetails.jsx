@@ -1,18 +1,40 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useLocation, Link } from "react-router-dom"
 import useItemList from "../../hooks/useItemList"
 import useReceipts from "../../hooks/useReceipts"
+import InfoToast from "../../components/InfoToast"
 
 const ReceiptDetails = () => {
   const location = useLocation()
   const receipt = location.state?.receipt
+  const ingredientsMissing = location.state?.ingredientsMissing
+
   const isIngredientAvailable = (ingredient, items) => items.some(item => item?.name === ingredient && item.status === 0);
-  const { items, fetchItems } = useItemList()
+  const { items, fetchItems, updateItem } = useItemList()
   const { fetchReceipts } = useReceipts()
 
+  const [ toastMessage, setToastMessage ] = useState('')
+  const trigger = 'setItemStatus'
+
+  const handleClick = () => {
+    const emptyIngredients = receipt.ingredients.filter((ingredient) => {
+      return items.some(item => item?.name === ingredient && item.status === 1)
+    })
+    const itemIds = emptyIngredients.map((ingredient) => {
+      return items.find(item => item?.name === ingredient).id
+    })
+    
+    if (itemIds.length === 0) {
+      setToastMessage('Alle Zutaten sind bereits auf der Einkaufsliste !')
+      return
+    }
+    itemIds.forEach(id => updateItem(id, 1))
+    setToastMessage('Alle noch fehlenden Zutaten auf die Einkaufsliste gesetzt !')
+  }
+
   useEffect(() => {
-    fetchReceipts();
-    fetchItems();
+    fetchReceipts()
+    fetchItems()
   }, [])
 
   return (
@@ -45,8 +67,20 @@ const ReceiptDetails = () => {
               {receipt?.description}
             </p>
           </div>
+
+          {ingredientsMissing &&
+            <button
+              id={trigger}
+              className="btn btn-sm btn-outline-success"
+              onClick={handleClick}
+            >
+              🍴 Lass uns das heute machen 🍴
+            </button>
+          }
+
         </div>
-        <div className="card-footer text-center d-flex justify-content-sm-start justify-content-between">
+        <div className="card-footer text-center d-flex justify-content-between">
+
           <Link 
             to={'..'}
             relative="path"
@@ -55,6 +89,7 @@ const ReceiptDetails = () => {
             <i className="bi bi-arrow-counterclockwise me-2"></i>
             Zurück
           </Link>
+
           <Link 
             to={`/receipts/${receipt.id}/edit`} 
             state={{ receipt }}
@@ -65,6 +100,10 @@ const ReceiptDetails = () => {
           </Link>
         </div>
       </div>
+      <InfoToast
+        message={toastMessage}
+        trigger={trigger}
+      />
     </div>
   )
 }
