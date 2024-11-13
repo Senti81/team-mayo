@@ -40,12 +40,12 @@ const Navbar = () => {
               </li>
               <li className="nav-item d-block d-sm-none">
                 <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="/items">
-                  <i className="bi bi-card-checklist" />                 
+                  <i className="bi bi-cart" />                 
                 </NavLink>
               </li>
               <li className="nav-item d-block d-sm-none">
                 <NavLink className={({ isActive }) => `nav-link rounded px-3 ${isActive ? 'bg-secondary text-light' : ''}`} to="/receipts">
-                  <i className="bi bi-lightbulb" />
+                  <i className="bi bi-receipt" />
                 </NavLink>
               </li>
             </ul>
