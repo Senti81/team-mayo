@@ -9,8 +9,6 @@ const useItemList = () => {
 
   const addItem = async (name) => {
     try {
-
-      // Check if the item already exists
       const q = query(collection(db, "shoppingList"), where("name", "==", name));
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
@@ -23,6 +21,7 @@ const useItemList = () => {
       return { success: false, message: error.message };
     }
   }
+  
   const updateItem = async (id, currentItemStatus) => {
     try {
       setLoading(true);

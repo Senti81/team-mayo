@@ -3,7 +3,7 @@ import AddTransactionModal from '../../components/AddTransactionModal.jsx'
 import useAuth from '../../hooks/useAuth.js';
 import useTransaction from '../../hooks/useTransaction.js';
 import Spinner from '../../components/Spinner.jsx';
-import DeleteTransactionModal from '../../components/DeleteTransactionModal.jsx';
+import DeleteModal from '../../components/DeleteModal.jsx';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase.js'
 
@@ -67,7 +67,10 @@ const TransactionList = () => {
       </div>
       
       <AddTransactionModal />
-      <DeleteTransactionModal transaction={transaction} onDeleteTransaction={deleteTransaction} />
+      <DeleteModal 
+        entity={transaction} 
+        onDeleteHandle={deleteTransaction}
+      />
     </>
   )
 }

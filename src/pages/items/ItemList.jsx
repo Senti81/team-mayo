@@ -15,7 +15,7 @@ const ShoppingList = () => {
   const handleToggle = async(id, currentItemStatus) => await updateItem(id, currentItemStatus)
   const handleResetFilter = () => setSearchTerm('')
 
-  useEffect(() => { fetchItems()}, [])
+  useEffect(() => fetchItems(), [])
   
   if (error) signOut(auth)
 
