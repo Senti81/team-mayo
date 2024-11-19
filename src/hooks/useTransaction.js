@@ -14,10 +14,6 @@ const useTransaction = () => {
     setError(null);
     try {
       const user = auth.currentUser
-      if (!user) {
-        throw new Error("Bitte melde dich an.")
-      }
-
       const names = user.displayName.split(' ');
       const initials = names.map(name => name.charAt(0).toUpperCase()).join('');
       
@@ -30,12 +26,12 @@ const useTransaction = () => {
 
       await addDoc(collection(db, "transactions"), transactionData)
 
-      setLoading(false);
       return { success: true, message: 'Transaktion erfolgreich hinzugefügt!' };
     } catch (error) {
       setError(error.message);
-      setLoading(false);
       return { success: false, message: error.message };
+    } finally {
+      setLoading(false)      
     }
   }
 

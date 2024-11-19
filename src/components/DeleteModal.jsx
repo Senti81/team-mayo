@@ -18,7 +18,7 @@ const DeleteModal = ({ entity, onDeleteHandle }) => {
               className="btn btn-success"
               data-bs-dismiss="modal"
             >
-              <i className="bi bi-x-lg"/>
+              <i className="bi bi-x-lg me-1"/>
               Abbrechen
             </button>
             <button
@@ -27,7 +27,7 @@ const DeleteModal = ({ entity, onDeleteHandle }) => {
               data-bs-dismiss="modal"
               onClick={() => onDeleteHandle(entity.id)}
             >
-              <i className="bi bi-check-lg"/>
+              <i className="bi bi-check-lg me-1"/>
               Löschen
             </button>
           </div>

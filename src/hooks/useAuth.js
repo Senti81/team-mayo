@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth"
 import { auth, provider } from "../config/firebase"
 
@@ -9,14 +9,14 @@ const useAuth = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(true)
-      currentUser ? setUser(currentUser) : setUser(null)
-      setLoading(false);
+      setUser(currentUser)
+      setLoading(false)
     });
     return () => unsubscribe();
   }, []);
 
-  const login = async() => {
+  const login = useCallback(async() => {
+    setLoading(true)
     setError(null)
     try {
       await signInWithPopup(auth, provider)
@@ -25,9 +25,10 @@ const useAuth = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  const logout = async() => {
+  const logout = useCallback(async() => {
+    setLoading(true)
     setError(null)
     try {
       await signOut(auth)
@@ -37,10 +38,9 @@ const useAuth = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
+  return { login, logout, user, loading, error }
+}
 
-  return { user, loading, login, logout, error };
-};
-
-export default useAuth;
+export default useAuth

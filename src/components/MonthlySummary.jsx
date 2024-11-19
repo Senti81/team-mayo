@@ -32,7 +32,7 @@ const MonthlySummary = ({ monthIndex }) => {
         <div></div>
         {balanceInfo.totalAmount !== '0.00' &&
           <div className="card-body">
-            <h1 className="card-title pricing-card-title">{balanceInfo?.totalAmount} €</h1>
+            <h1 className="card-title pricing-card-title">{balanceInfo?.totalAmount} €</h1>           
           </div>
         }
       </div>

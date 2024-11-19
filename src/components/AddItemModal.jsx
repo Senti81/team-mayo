@@ -25,7 +25,7 @@ const ShoppingListForm = () => {
             <div className="modal-body">              
               <div className="form-floating mb-3">
                 <input
-                  type="text"
+                  type="text"                  
                   className="form-control"
                   id="floatingInput"
                   value={item}

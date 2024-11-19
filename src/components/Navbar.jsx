@@ -10,9 +10,9 @@ const Navbar = () => {
       <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary">
         <div className='container-fluid'>
           <div className="navbar-collapse d-flex align-items-center justify-content-between" id="navbarNav">
-            <a className="navbar-brand" href="/">
+            <NavLink className="navbar-brand" to="/">
               <img src={brand} alt="Bootstrap" width="30" height="30"/>
-            </a>
+            </NavLink>
             <ul className="navbar-nav flex-row">
 
               {/* Viewport >= Tablet */}
