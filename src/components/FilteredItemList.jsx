@@ -7,7 +7,7 @@ const FilteredItemList = ({ items, searchTerm, handleToggle, status }) => {
       badge: 'bg-success-subtle'
     },
     1: {
-      name: '(Fast) Leer:',
+      name: 'Leer:',
       border: 'border-warning',
       badge: 'bg-warning-subtle'
     },

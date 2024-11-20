@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { auth } from '../../config/firebase'
-import { signOut } from 'firebase/auth'
 
 import AddItemModal from '../../components/AddItemModal'
 import FilteredItemList from '../../components/FilteredItemList'
 import ItemSearchBar from '../../components/ItemSearchBar'
 
 import useItemList from '../../hooks/useItemList'
+import ErrorDialog from '../../components/ErrorDialog'
 
 const ShoppingList = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,36 +15,17 @@ const ShoppingList = () => {
   const handleResetFilter = () => setSearchTerm('')
 
   useEffect(() => fetchItems(), [])
-  
-  if (error) signOut(auth)
 
+  if (error) return <ErrorDialog error={error}/>
+  
   return (
     <div className="container">
       <AddItemModal />
       <div className="row mx-1">
-        <ItemSearchBar 
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          handleResetFilter={handleResetFilter}
-        />
-        <FilteredItemList
-          items={items}
-          handleToggle={handleToggle}
-          searchTerm={searchTerm}
-          status={2}
-        />
-        <FilteredItemList
-          items={items}
-          handleToggle={handleToggle}
-          searchTerm={searchTerm}
-          status={1}
-        />
-        <FilteredItemList
-          items={items}
-          handleToggle={handleToggle}
-          searchTerm={searchTerm}
-          status={0}
-        />
+        <ItemSearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleResetFilter={handleResetFilter} />
+        <FilteredItemList items={items} handleToggle={handleToggle} searchTerm={searchTerm} status={2} />
+        <FilteredItemList items={items} handleToggle={handleToggle} searchTerm={searchTerm} status={1} />
+        <FilteredItemList items={items} handleToggle={handleToggle} searchTerm={searchTerm} status={0}/>
       </div>
     </div>
   )

@@ -5,14 +5,12 @@ import InfoToast from './InfoToast';
 const ShoppingListForm = () => {
   const [item, setItem] = useState('')
   const [message, setMessage] = useState('')
-  const [error, setError] = useState(null)
   const { addItem } = useItemList()
 
   const trigger = 'addItem'
 
   const handleAddItem = async () => {
     const result = await addItem(item)
-    result.success ? setError(false) : setError(true)
     setMessage(`${result.message}`)      
     setItem('')
   }

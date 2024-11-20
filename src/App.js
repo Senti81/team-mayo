@@ -15,7 +15,7 @@ import AddReceipt from './pages/receipts/AddReceipt'
 import Profile from './pages/profile/Profile'
 
 function App() {
-  const { user, loading } = useAuth();
+  const { user, loading } = useAuth()
 
   if (loading) return <Spinner />
   if (!user) return <Login />

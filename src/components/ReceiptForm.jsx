@@ -30,7 +30,8 @@ const ReceiptForm = ({ receipt = {} }) => {
     if (receipt.id) {
       await updateReceipt(receipt.id, payload)
     } else {
-      await addReceipt(payload)
+      const result = await addReceipt(payload)
+      console.log(result.message)
     }    
     navigate('/receipts')
   }

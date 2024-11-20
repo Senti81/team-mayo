@@ -1,18 +1,20 @@
 import React, { useEffect } from "react"
-
 import useReceipts from "../../hooks/useReceipts"
 import useItemList from "../../hooks/useItemList"
 import ReceiptCard from "../../components/ReceiptCard"
 import { Link } from "react-router-dom"
+import ErrorDialog from "../../components/ErrorDialog"
 
 const ReceiptList = () => {
-  const { receipts, fetchReceipts } = useReceipts()
+  const { receipts, fetchReceipts, error } = useReceipts()
   const { items, fetchItems } = useItemList()
 
   useEffect(() => {
-    fetchReceipts();
-    fetchItems();
+    fetchReceipts()
+    fetchItems()
   }, [])
+
+  if (error) return <ErrorDialog error={error}/>
 
   return (
     <div className="container mt-2">

@@ -15,7 +15,7 @@ const TransactionForm = () => {
     } else {
       console.log(`Fehler: ${result.message}`)
     }
-  };
+  }
 
   return (
     <div className="container">
