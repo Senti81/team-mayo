@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Navbar />}>
             <Route index element={<Main />} />
-            <Route path='profile' element={<Profile />} />
+            <Route path='/profile' element={<Profile />} />
             <Route path='/transactions' element={<TransactionList />} />
             <Route path='/items' element={<ItemList />} />
             <Route path='/receipts' element={<ReceiptList />} />

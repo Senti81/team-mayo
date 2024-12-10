@@ -6,13 +6,19 @@ const useAuth = () => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [isAdmin, setAdmin] = useState(false)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-      setLoading(false)
+      if (currentUser) {
+        setUser(currentUser)
+        setAdmin(currentUser.uid === process.env.REACT_APP_ADMIN_UID)
+       } else {
+        setError('User nicht angemeldet')
+       }  
+      setLoading(false)      
     });
-    return () => unsubscribe();
+    return () => unsubscribe()
   }, []);
 
   const login = useCallback(async() => {
@@ -21,7 +27,7 @@ const useAuth = () => {
     try {
       await signInWithPopup(auth, provider)
     } catch (e) {
-      setError('Fehler beim Anmelden:', e.message)
+      setError(`Fehler beim Anmelden: ${e.message}`)
     } finally {
       setLoading(false)
     }
@@ -34,13 +40,13 @@ const useAuth = () => {
       await signOut(auth)
       console.log('Erfolgreich abgemeldet')
     } catch (e) {
-      setError('Fehler beim Abmelden:', e.message)
+      setError(`Fehler beim Abmelden: ${e.message}`)
     } finally {
       setLoading(false)
     }
   }, [])
 
-  return { login, logout, user, loading, error }
+  return { login, logout, user, isAdmin, loading, error }
 }
 
 export default useAuth

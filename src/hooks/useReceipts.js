@@ -9,7 +9,7 @@ const useReceipts = () => {
   
   const addReceipt = async (payload) => {
     setError(null)
-    setLoading(true)
+    setLoading(true) 
     try {
       await addDoc(collection(db, 'receipts'), payload)
       return { success : true, message: 'Rezept erfolgreich angelegt'}

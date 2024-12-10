@@ -9,7 +9,7 @@ import ErrorDialog from '../../components/ErrorDialog'
 
 const ShoppingList = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { items, fetchItems, updateItem, error } = useItemList()
+  const { items, loading, fetchItems, updateItem, error } = useItemList()
 
   const handleToggle = async(id, currentItemStatus) => await updateItem(id, currentItemStatus)
   const handleResetFilter = () => setSearchTerm('')
@@ -23,9 +23,9 @@ const ShoppingList = () => {
       <AddItemModal />
       <div className="row mx-1">
         <ItemSearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleResetFilter={handleResetFilter} />
-        <FilteredItemList items={items} handleToggle={handleToggle} searchTerm={searchTerm} status={2} />
-        <FilteredItemList items={items} handleToggle={handleToggle} searchTerm={searchTerm} status={1} />
-        <FilteredItemList items={items} handleToggle={handleToggle} searchTerm={searchTerm} status={0}/>
+        <FilteredItemList items={items} loading={loading} handleToggle={handleToggle} searchTerm={searchTerm} status={2} />
+        <FilteredItemList items={items} loading={loading} handleToggle={handleToggle} searchTerm={searchTerm} status={1} />
+        <FilteredItemList items={items} loading={loading} handleToggle={handleToggle} searchTerm={searchTerm} status={0}/>
       </div>
     </div>
   )

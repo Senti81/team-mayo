@@ -1,4 +1,6 @@
-const FilteredItemList = ({ items, searchTerm, handleToggle, status }) => {
+import Placeholder from "./Placeholder"
+
+const FilteredItemList = ({ items, loading, searchTerm, handleToggle, status }) => {
 
   const formatComponent = {
     0: {
@@ -25,15 +27,19 @@ const FilteredItemList = ({ items, searchTerm, handleToggle, status }) => {
       <div className={`h4 pb-2 mb-4 border-bottom ${currentFormat.border}`}>
         <h6 className='display-6'>{currentFormat.name}</h6>
       </div>
-        {items.filter((item) => item.status === status && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
-          <span 
-          key={item.id}
-          className={`badge rounded-pill text-primary-emphasis m-1 px-2 py-1 ${currentFormat.badge}`}
-          onClick={() => handleToggle(item.id, item.status)}
-          >
-          {item.name}
-          </span>
-        ))}
+        {loading ? <Placeholder /> :
+          <>
+            {items.filter((item) => item.status === status && item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
+              <span 
+                key={item.id}
+                className={`badge rounded-pill text-primary-emphasis m-1 px-2 py-1 ${currentFormat.badge}`}
+                onClick={() => handleToggle(item.id, item.status)}
+              >
+                {item.name}
+              </span>
+            ))}
+          </>        
+        }
     </div>
   )
 }
